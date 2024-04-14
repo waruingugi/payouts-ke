@@ -1,0 +1,42 @@
+{% load static %}
+<section unicorn:poll-30000="mount" class="my-5">
+    <div class="container">
+        <h4 class="text-heading">Performance</h4>
+        <div class="card border-0" style="border-radius: 0.5rem;">
+            <div class="card-body p-1">
+                <div class="row gx-2 scroll-container flex-nowrap">
+
+                    {% for key, value in performance.items %}
+                        <div class="col-7 col-md-3">
+                            <div class="rounded p-1 {{ key | lower }}-bg">
+                                <div class="d-flex flex-column justify-content-center align-items-center py-2">
+                                    <div class="d-flex d-lg-flex align-items-center align-items-lg-center my-2" style="height: 8rem;">
+                                        <img class="img-fluid" src="{% static 'assets/img/' %}{{ key | lower }}.svg"  width="120px">
+                                    </div>
+                                    {% if value.flow == "increase" %}
+                                        <span class="badge rounded-pill bg-light bg-white text-success" style="font-family: 'Public Sans', sans-serif;">
+                                            <i class="fas fa-arrow-up me-2"></i>+{{ value.percentage|floatformat:2 }}%
+                                        </span>
+
+                                    {% else %}
+                                        <span class="badge rounded-pill bg-light bg-white text-danger" style="font-family: 'Public Sans', sans-serif;">
+                                            <i class="fas fa-arrow-down me-2"></i>-{{ value.percentage|floatformat:2 }}%
+                                        </span>
+
+                                    {% endif %}
+                                </div>
+                                <div class="d-flex flex-column justify-content-between align-items-center bg-white rounded p-2 shadow-sm text-muted performance-desc">
+                                    <p class="text-muted my-0 text-center mb-1">
+                                        {{ key | lower | capfirst }} payouts are {% if value.flow == "increase" %} {{ value.percentage|floatformat:2 }}% higher {% else %} {{ value.percentage|floatformat:2 }}% lower {% endif %} than yesterday.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                    {% endfor %}
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

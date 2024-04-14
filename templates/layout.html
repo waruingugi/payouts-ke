@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Aviator {{ title }}</title>
+
+    {% load static %}
+
+    <meta name="description" content="Get FREE over 25x signals. No sign up or app download required!">
+    <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="{% static 'assets/img/favicon/apple-touch-icon.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'assets/img/favicon/favicon-16x16.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'assets/img/favicon/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="180x180" href="{% static 'assets/img/favicon/apple-touch-icon.png' %}" >
+    <link rel="icon" type="image/png" sizes="192x192" href="{% static 'assets/img/favicon/android-chrome-192x192.png' %}">
+    <link rel="icon" type="image/png" sizes="512x512" href="{% static 'assets/img/favicon/android-chrome-512x512.png' %}">
+
+    <link rel="stylesheet" href="{% static 'assets/bootstrap/css/bootstrap.min.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/styles.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/mk_charts.css' %}" />
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Bebas+Neue&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Public+Sans:300,400,500,600,700,800,900&amp;display=swap">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@6.6.6/css/flag-icons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script type='text/javascript'>
+        window.smartlook||(function(d) {
+          var o=smartlook=function(){ o.api.push(arguments)},h=d.getElementsByTagName('head')[0];
+          var c=d.createElement('script');o.api=new Array();c.async=true;c.type='text/javascript';
+          c.charset='utf-8';c.src='https://web-sdk.smartlook.com/recorder.js';h.appendChild(c);
+          })(document);
+          smartlook('init', 'e423fad48f101e1fc013b99b3a9295c94107638a', { region: 'eu' });
+    </script>
+    <script src="https://js.sentry-cdn.com/f6119b73de78d286a171d25706755f3c.min.js" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+
+    {% block content %}
+        <!-- body content -->
+    {% endblock %}
+
+    {% block scripts %}
+        <!-- JS scripts -->
+    {% endblock %}
+
+
+    <script src="{% static 'assets/bootstrap/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'assets/js/bs-init.js' %}"></script>
+    <script src="{% static 'assets/js/custom.js' %}"></script>
+</body>
+
+</html>

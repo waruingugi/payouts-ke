@@ -1,0 +1,64 @@
+{% load unicorn %}
+<section class="mt-5">
+    <div class="container">
+        <div class="card stats-chart my-3">
+            <div class="card-header bg-white">
+                <div class="row">
+                    <div class="col-7">
+                        <h4 class="card-title text-heading">{{ app_name | lower | capfirst }} History</h4>
+                    </div>
+                    <div class="col-5">
+                        <button unicorn:click="refresh_payouts_query" unicorn:loading.attr="disabled" class="btn btn-light float-end" type="button">
+                        <i class="fas fa-redo me-1"></i>Refresh</button>
+                    </div>
+                </div>
+
+                <div unicorn:ignore class="row justify-content-between my-2">
+
+                    <div class="col-12 col-md-4 my-2">
+                        <select unicorn:model="selected_duration" class="form-select" unicorn:partial.id="payouts-table">
+                            {% for label, duration in duration_filters.items %}
+                                {% if duration == selected_duration %}
+                                    <option value="{{ duration }}" selected="">{{ label }}</option>
+                                {% else %}
+                                    <option value="{{ duration }}">{{ label }}</option>
+                                {% endif %}
+                            {% endfor %}
+                        </select>
+                    </div>
+
+
+                    <div unicorn:ignore class="col-12 col-md-6 my-2">
+                        <div class="d-flex justify-content-end">
+                            <select unicorn:model="selected_min_value" id="payouts-filter" class="form-select" unicorn:partial.id="payouts-table">
+                                {% for label, value in min_value_filters.items %}
+                                    {% if value == selected_min_value %}
+                                        <option value="{{ value }}" selected="">{{ label }}</option>
+                                    {% else %}
+                                        <option value="{{ value }}">{{ label }}</option>
+                                    {% endif %}
+                                {% endfor %}
+                            </select>
+
+                            <select unicorn:model="selected_page_size" class="form-select ms-3 w-25" unicorn:partial.id="payouts-table">
+                                <optgroup label="Total per page">
+                                    {% for label, value in page_size_filters.items %}
+                                        {% if value == selected_page_size %}
+                                            <option value="{{ value }}" selected="">{{ label }}</option>
+                                        {% else %}
+                                            <option value="{{ value }}">{{ label }}</option>
+                                        {% endif %}
+                                    {% endfor %}
+
+                                </optgroup>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {% unicorn 'table' %}
+
+        </div>
+    </div>
+</section>

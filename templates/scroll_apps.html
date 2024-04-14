@@ -1,0 +1,58 @@
+<section>
+    <div class="container">
+        <div class="site-options-row bg-white scroll-container">
+
+            {% if request.path == '/betgr8/' %}
+                <div class="scroll-column with-border-right" style="order: -1">
+                    <a href="{% url 'betgr8:dashboard' %}" class="btn btn-light active site-option-button" role="button">Betgr8</a>
+                </div>
+            {% else %}
+                <div class="scroll-column with-border-right">
+                    <a href="{% url 'betgr8:dashboard' %}" class="button btn btn-light" role="button">Betgr8</a>
+                </div>
+            {% endif %}
+
+
+            {% if request.path == '/betika/' %}
+                <div class="scroll-column with-border-right" style="order: -1">
+                    <a href="{% url 'betika:dashboard' %}" class="btn btn-light active site-option-button" role="button">Betika</a>
+                </div>
+            {% else %}
+                <div class="scroll-column with-border-right">
+                    <a href="{% url 'betika:dashboard' %}" class="button btn btn-light" role="button">Betika</a>
+                </div>
+            {% endif %}
+
+            {% if request.path == '/odibets/' %}
+                <div class="scroll-column with-border-right" style="order:-1">
+                    <a href="{% url 'odibets:dashboard' %}" class="btn btn-light active site-option-button" role="button">Odibets</a>
+                </div>
+            {% else %}
+                <div class="scroll-column with-border-right">
+                    <a href="{% url 'odibets:dashboard' %}" class="button btn btn-light" role="button">Odibets</a>
+                </div>
+            {% endif %}
+
+            {% if request.path == '/winpesa/' %}
+                <div class="scroll-column with-border-right" style="order: -1">
+                    <a href="{% url 'winpesa:dashboard' %}" class="btn btn-light active site-option-button" role="button">Winpesa</a>
+                </div>
+            {% else %}
+                <div class="scroll-column with-border-right" style="order: 1">
+                    <a href="{% url 'winpesa:dashboard' %}" class="button btn btn-light" role="button">Winpesa</a>
+                </div>
+            {% endif %}
+
+            {% if request.path == '/hub/' or request.path == '/' %}
+                <div class="scroll-column with-border-right" style="order: -1">
+                    <a href="{% url 'hub:dashboard' %}" class="btn btn-light active site-option-button" role="button">All Apps</a>
+                </div>
+            {% else %}
+                <div class="scroll-column" style="order: 2">
+                    <a href="{% url 'hub:dashboard' %}" class="button btn btn-light" role="button">All Apps</a>
+                </div>
+            {% endif %}
+
+        </div>
+    </div>
+</section>

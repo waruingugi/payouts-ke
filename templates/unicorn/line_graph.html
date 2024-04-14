@@ -1,0 +1,119 @@
+<section unicorn:poll-60000="update_graph">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="card shadow line-chart border-0">
+                    <div class="card-header d-flex justify-content-between bg-white border-0">
+                        <div>
+                            <h4 class="text-heading mb-0">Payouts Trend</h4><small class="text-muted">Intervals</small>
+                        </div>
+                        <div>
+                            <div class="dropstart"><button class="btn btn-light btn-light-no-change" aria-expanded="false" data-bs-toggle="dropdown" type="button"><i class="fas fa-ellipsis-v text-black-50"></i></button>
+                                <div unicorn:ignore class="dropdown-menu border-0">
+                                    {% for label, duration in graph_duration_filters.items %}
+                                        <a class="dropdown-item" unicorn:click="set_graph_duration('{{ duration }}')" unicorn:partial.id="chart" href="#">{{ label }}</a>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-area">
+                            <canvas id="chart" ></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% block scripts %}
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+        <script>
+            function drawChart(xValues, yValues) {
+                new Chart("chart", {
+                    type: "line",
+                    data: {
+                        labels: xValues,
+                        datasets: [{
+                            label: 'Odds',
+                            fill: true,
+                            data: yValues,
+                            backgroundColor: 'rgba(78, 115, 223, 0.05)',
+                            borderColor: 'rgba(78, 115, 223, 1)',
+                        }]
+                    },
+                    options: {
+                        animation: {
+                            duration: 3000, // Animation duration in milliseconds
+                            easing: 'easeInOutQuint' // Easing function
+                        },
+                        maintainAspectRatio: false,
+                        legend: {
+                            display: false,
+                            labels: {
+                                fontStyle: 'normal'
+                            }
+                        },
+                        title: {
+                            fontStyle: 'normal',
+                            display: false
+                        },
+                        scales: {
+                            xAxes: [{
+                                gridLines: {
+                                    color: 'rgb(234, 236, 244)',
+                                    zeroLineColor: 'rgb(234, 236, 244)',
+                                    drawBorder: false,
+                                    drawTicks: false,
+                                    borderDash: ['1'],
+                                    zeroLineBorderDash: ['1'],
+                                    drawOnChartArea: false
+                                },
+                                ticks: {
+                                    fontColor: '#858796',
+                                    fontFamily: 'Montserrat, sans-serif',
+                                    fontSize: '10',
+                                    fontStyle: 'normal',
+                                    beginAtZero: false,
+                                    padding: 10
+                                }
+                            }],
+                            yAxes: [{
+                                gridLines: {
+                                    color: 'rgb(234, 236, 244)',
+                                    zeroLineColor: 'rgb(234, 236, 244)',
+                                    drawBorder: false,
+                                    drawTicks: false,
+                                    borderDash: ['1'],
+                                    zeroLineBorderDash: ['1'],
+                                    drawOnChartArea: true
+                                },
+                                ticks: {
+                                    fontColor: '#858796',
+                                    fontFamily: 'Montserrat, sans-serif',
+                                    fontSize: '10',
+                                    fontStyle: 'normal',
+                                    beginAtZero: false,
+                                    suggestedMin: 1,
+                                    padding: 10,
+                                    callback: function (value, index, values) {
+                                        return value + 'x';
+                                    }
+                                }
+                            }]
+                        }
+                    }
+                });
+            }
+
+            // Call the function on page load
+            const xValues = {{ x_values | safe }};
+            const yValues = {{ y_values | safe }};
+            drawChart(xValues, yValues);
+
+        </script>
+
+    {% endblock %}
+</section>

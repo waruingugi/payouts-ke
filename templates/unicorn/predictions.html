@@ -1,0 +1,73 @@
+
+{% load static %}
+<section unicorn:poll-30000="mount" class="mb-5">
+    <div class="container">
+        <h4 class="text-heading">{{ app_name | lower | capfirst }} Predictions</h4>
+        <div class="card border-0" style="border-radius: 0.5rem;">
+            <div class="card-body p-1">
+                <div class="row gx-2 scroll-container flex-nowrap">
+
+
+                    {% for key, value in app_prob.items %}
+
+                        <div class="col-7 col-md-4">
+                            <div class="bg-light rounded p-1 {%if value.probability > 75 %}border-success{% elif value.probability > 50 %}border-warning{% else %}border-danger{% endif %}">
+                                <div class="d-flex flex-column justify-content-center align-items-center py-2">
+                                    <h4 style="font-family: 'Bebas Neue', serif !important;" class="text-heading mb-0 {%if value.probability > 75 %}text-success{% elif value.probability > 50 %}text-warning{% else %}text-danger{% endif %}">{{ key }}</h4>
+                                    <div class="mkCharts my-2" data-percent="{{ value.probability | floatformat:2 }}" data-size="100" data-stroke="1" data-color="{%if value.probability > 75 %}#71dd37{% elif value.probability > 50 %}#ffab00{% else %}#ff3e1d{% endif %}">
+
+                                    </div>
+                                    <span class="badge rounded-pill bg-white {%if value.probability > 75 %}text-success{% elif value.probability > 50 %}text-warning{% else %}text-danger{% endif %}"><i class="far fa-clock me-1"></i>{{ value.event_start }} - {{ value.event_end }}</span>
+                                </div>
+                                <div class="d-flex flex-column justify-content-center align-items-center rounded p-1 bg-white shadow-sm">
+                                    {% if value.probability > 90 %}
+                                        <p class="text-muted my-0 text-center">There is a high chance an {{ key }} payout will happen soon.</p>
+                                    {% elif value.probability > 75 %}
+                                        <p class="text-muted my-0 text-center">There is a good chance an {{ key }} payout will happen soon.</p>
+                                    {% elif value.probability > 50 %}
+                                        <p class="text-muted my-0 text-center">There is a fair chance an {{ key }} payout will happen soon.</p>
+                                    {% else %}
+                                        <p class="text-muted my-0 text-center">There is a low chance an {{ key }} payout will happen soon.</p>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+
+                    {% endfor %}
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% block scripts %}
+        <script>
+
+            function initializeCircleCharts() {
+                let charts = document.getElementsByClassName('mkCharts');
+
+                for(let i=0;i<charts.length;i++) {
+                    let chart = charts[i];
+                    let percent = chart.dataset.percent;
+                    let color = ('color' in chart.dataset) ? chart.dataset.color : "#2F4F4F";
+                    let size = ('size' in chart.dataset) ? chart.dataset.size : "100";
+                    let stroke = ('stroke' in chart.dataset) ? chart.dataset.stroke : "1";
+                    charts[i].innerHTML = `<svg class="mkc_circle-chart" viewbox="0 0 36 36" width="${size}" height="${size}" xmlns="http://www.w3.org/2000/svg">
+                        <path class="mkc_circle-bg" stroke="rgba(255, 255, 255, 0.9)" stroke-width="${stroke * 0.5}" fill="none" d="M18 2.0845
+                              a 15.9155 15.9155 0 0 1 0 31.831
+                              a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                        <path class="mkc_circle" stroke="${color}" stroke-width="${stroke}" stroke-dasharray="${percent},100" stroke-linecap="round" fill="none"
+                            d="M18 2.0845
+                              a 15.9155 15.9155 0 0 1 0 31.831
+                              a 15.9155 15.9155 0 0 1 0 -31.831" />
+                        <text fill="${color}" font-weight="normal"
+                font-family="'Bebas Neue', serif" class="mkc_info" x="50%" y="50%" alignment-baseline="central" text-anchor="middle" font-size="10">${percent}%</text>
+                <text fill="${color}" font-family="'Bebas Neue', serif" font-weight="normal" class="mkc_info" x="50%" y="70%" alignment-baseline="central" text-anchor="middle" font-size="5">chance</text>
+                    </svg>`;
+                }
+            }
+
+        </script>
+
+    {% endblock %}
+</section>

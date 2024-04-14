@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    {% csrf_token %}
+
+    {% include "navbar.html" %}
+    {% include "scroll_apps.html" %}
+    {% include "intro.html" %}
+
+    {% load unicorn %}
+    {% unicorn_scripts %}
+
+    {% unicorn 'hub_suggestions' %}
+    {% unicorn 'hub_recommendations' %}
+    {% unicorn 'hub_performance' %}
+
+    {% include 'footer.html' %}
+
+{% endblock %}

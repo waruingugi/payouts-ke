@@ -1,0 +1,20 @@
+version: "3.9"
+
+services:
+  app:
+    build:
+      context: ../
+      dockerfile: ./docker/Dockerfile
+    image: payouts
+    networks:
+      - payouts-backend-network
+    container_name: aviator-payouts
+    restart: always
+    volumes:
+      - .:/payouts
+    ports:
+      - "8000:8000"
+
+networks:
+  payouts-backend-network:
+    name: payouts-backend-network

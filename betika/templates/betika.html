@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    {% csrf_token %}
+
+    {% include "navbar.html" %}
+    {% include "scroll_apps.html" %}
+
+    {% load unicorn %}
+    {% unicorn_scripts %}
+
+    {% unicorn 'betika_line_graph' %}
+
+    {% unicorn 'betika_suggestions' %}
+    {% unicorn 'betika_predictions' %}
+
+    {% unicorn 'betika_payouts' %}
+
+    {% include 'footer.html' %}
+
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    {% csrf_token %}
+
+    {% include "navbar.html" %}
+    {% include "scroll_apps.html" %}
+
+    {% load unicorn %}
+    {% unicorn_scripts %}
+
+    {% unicorn 'betgr8_line_graph' %}
+
+    {% unicorn 'betgr8_suggestions' %}
+    {% unicorn 'betgr8_predictions' %}
+
+    {% unicorn 'betgr8_payouts' %}
+
+    {% include 'footer.html' %}
+
+{% endblock %}

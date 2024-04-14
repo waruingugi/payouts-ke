@@ -1,0 +1,33 @@
+<div class="card-body">
+    <div class="table-responsive" id="payouts-table">
+        <table class="table table-hover">
+            <thead class="position-sticky top-0 bg-white">
+                <tr>
+                    <th class="fw-normal">Timestamp</th>
+                    <th class="fw-normal">Payout</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for obj in payouts %}
+                    <tr>
+                        <td>{{ obj.created_at | date:"h:i:s a" }} </td>
+                        {% if obj.payout < 10 %}
+                            <td>{{ obj.payout }}x</td>
+                        {% elif obj.payout >= 10 and obj.payout < 50 %}
+                            <td><span class="payout-badge bg-success-payout">{{ obj.payout }}x</span></td>
+                        {% elif obj.payout >= 50 and obj.payout < 100 %}
+                            <td><span class="payout-badge bg-warning-payout">{{ obj.payout }}x</span></td>
+                        {% else %}
+                            <td><span class="payout-badge bg-danger-payout">{{ obj.payout }}x</span></td>
+                        {% endif %}
+                    </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="2" class="fs-5 text-center bg-light"><em>Sorry, No data to show. Please contact admin <a href="https://chat.whatsapp.com/Go1OsHwCPxP3wOPJczphQa">here</a> </em></td>
+                </tr>
+                {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+</div>

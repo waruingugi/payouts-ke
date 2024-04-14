@@ -1,0 +1,34 @@
+{% load static %}
+<section unicorn:poll-30000="mount" class="mt-5 mb-4">
+    <div class="container">
+
+        <h4 class="text-heading">Suggestions</h4>
+        <div class="card border-0" style="border-radius: 0.5rem;">
+            <div class="card-body p-1">
+                <div class="scroll-container flex-nowrap row-cols-auto">
+                    {% with '/unicorn/message/' as base_path %}
+                        {% with path=request.path|cut:base_path %}
+                            {% with path=path|cut:'_suggestions' %}
+
+                                {% for key, value in suggestions.items %}
+
+                                    <div class="d-flex d-md-flex justify-content-center justify-content-md-start stats-div bg-light" {% if path == key|lower %} style="order: -1;"{% endif %}>
+                                        <div class="d-flex justify-content-center align-items-center">
+                                            <div class="d-flex justify-content-center align-items-center"><img class="rounded suggestion-app-logo" src="{% static 'assets/img/' %}{{ key | lower }}-logo.svg"></div>
+                                        </div>
+                                        <div class="d-flex flex-column justify-content-center ms-2">
+                                            <p class="text-muted my-0">{{ value }}</p>
+                                        </div>
+                                    </div>
+
+                                {% endfor %}
+
+                            {% endwith %}
+                        {% endwith %}
+                    {% endwith %}
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,32 @@
+{% load static %}
+<section unicorn:poll-30000="mount" class="my-5">
+    <div class="container">
+        <h4 class="text-heading">Recommended</h4>
+        <div class="card border-0" style="border-radius: 0.5rem;">
+            <div class="card-body p-1">
+                <div class="row gx-2 scroll-container flex-nowrap">
+
+                    {% for key, value in recommendations.items %}
+
+                        <div class="col-7 col-md-3">
+                            <div class="rounded p-1 bg-light {{ key | lower }}-border">
+                                <div class="d-flex flex-column justify-content-center align-items-center py-2">
+                                    <div class="d-flex d-lg-flex align-items-center align-items-lg-center" style="height: 8rem;">
+                                        <img class="img-fluid rounded-circle" src="{% static 'assets/img/' %}{{ key | lower }}-logo.svg" width="120px">
+                                    </div>
+                                    <span class="badge rounded-pill bg-light bg-white text-muted mt-2" style="font-family: 'Public Sans', sans-serif;">{{ key }}</span>
+                                </div>
+                                <div class="d-flex flex-column justify-content-between align-items-center bg-white rounded p-2 shadow-sm text-muted picks-description">
+                                    <p class="text-muted my-0 text-center mb-1">{{ value }}</p>
+                                    <a class="btn btn-light btn-sm w-100 rounded text-muted" role="button" href="{% url key|lower|add:':dashboard' %}">{{ key }}<i class="fas fa-arrow-right ms-2"></i></a>
+                                </div>
+                            </div>
+                        </div>
+
+                    {% endfor %}
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,40 @@
+<section>
+    <div class="container">
+        <div class="card mt-5 stats-chart">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-sm-12 col-md-4 pb-3 pb-md-0">
+                        <div class="d-flex justify-content-between stats-div">
+                            <div>
+                                <h5 class="text-heading mb-1">Highest Payout</h5>
+                                <h4 class="fw-bold mb-1">{{ highest_payout.payout | default:0.00}}x</h4>
+                                <p class="text-muted mb-0">Was at {{ highest_payout.created_at | date:"H:ia" | default:"Null" }}</p>
+                            </div>
+                            <div class="pt-2"><span class="rounded stats-avatar shadow-sm"><i class="fas fa-chart-line"></i></span></div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-4 pb-3 pb-md-0">
+                        <div class="d-flex justify-content-between stats-div">
+                            <div>
+                                <h5 class="text-heading mb-1">Peak Hour</h5>
+                                <h4 class="fw-bold mb-1">{{ peak_hour | date:"H:i a" | default:"Null" }}</h4>
+                                <p class="text-muted mb-0">Had the best payouts</p>
+                            </div>
+                            <div class="pt-2"><span class="rounded stats-avatar shadow-sm"><i class="far fa-clock"></i></span></div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-4">
+                        <div class="d-flex justify-content-between stats-div">
+                            <div>
+                                <h5 class="text-heading mb-1">Average</h5>
+                                <h4 class="fw-bold mb-1">{{ average_payout }}x</h4>
+                                <p class="text-muted mb-0">For the past {{ average_duration }} hour</p>
+                            </div>
+                            <div class="pt-2"><span class="rounded stats-avatar shadow-sm"><i class="far fa-chart-bar"></i></span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
